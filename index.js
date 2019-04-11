@@ -6,17 +6,26 @@ function Circle(radius) {
     // private local variable to hide it from the public
     let defaultLocation = {x:0, y:0};
 
-    //private method
-    let computeOptimumLocation = function (factor) {
-        console.log('private method called with draw and param: '+factor);
-    };
-
+    this.getDefaultLocation = function () {
+        return defaultLocation;
+    }
     this.draw = function() {
-        computeOptimumLocation(0.1);
         console.log('draw');
     };
 
+    Object.defineProperty(this, 'defaultLocation', {
+        get: function () {
+            return defaultLocation;
+        },
+        set: function (value) {
+            if (!value.x || !value.y) {
+                throw new Error('Invalid location');
+            }
+            defaultLocation = value;
+        }
+    })
 }
 const circle = new Circle(10);
+// circle.defaultLocation = 1;
 circle.draw();
 
