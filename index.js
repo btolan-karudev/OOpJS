@@ -1,27 +1,22 @@
-// Constructor Function
+
 function Circle(radius) {
-    // console.log('this', this);
+    
     this.radius = radius;
+
+    // private local variable to hide it from the public
+    let defaultLocation = {x:0, y:0};
+
+    //private method
+    let computeOptimumLocation = function (factor) {
+        console.log('private method called with draw and param: '+factor);
+    };
+
     this.draw = function() {
+        computeOptimumLocation(0.1);
         console.log('draw');
-    }
+    };
+
 }
-const circle = new Circle(1);
+const circle = new Circle(10);
+circle.draw();
 
-// console.log('this', this);
-
-// enumerating all the members in a obj
-for (let key in circle) {
-    if (typeof circle[key] !== 'function') {
-        console.log(key, circle[key]);
-    }
-}
-
-// get all the keys in an obj (array) 
-const keys = Object.keys(circle);
-console.log(keys);
-
-// check the existence of a prop or method
-if ('radius' in circle) {
-console.log('Circle has a radius');    
-} 
